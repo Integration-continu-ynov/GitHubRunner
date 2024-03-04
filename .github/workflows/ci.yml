@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Start Docker Compose
-        run: docker-compose up -d
+        run:
+          cd ../../TP14-web-php-bdd
+          docker-compose up -d
 
       - name: Display associated web page
         run: |
