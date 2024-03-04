@@ -1,0 +1,33 @@
+version: "3"
+services:
+  nginx:
+    image: lscr.io/linuxserver/nginx:latest
+    container_name: nginx
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./volumeNginx:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+  db1:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: nom
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_USER: bahnon
+    volumes:
+      - ./volumeBdd.sql:/docker-entrypoint-initdb.d/1.sql
+  pma:
+    container_name: project_pma_hunting_table
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: db1
+    ports:
+      - "8080:80"
+    links:
+      - db1
