@@ -15,7 +15,7 @@ jobs:
 
       - name: Start Docker Compose
         run: |
-          cd ../../TP14-web-php-bdd
+          cd TP14-web-php-bdd/
           docker-compose up -d
 
       - name: Display associated web page
